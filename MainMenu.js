@@ -257,7 +257,7 @@ function MainMenu(){
             }
         }
         
-        if(onMobileDevice){
+        if(onMobileDevice()){
             if(startPlayingAudio){
                 if(audio_mainBGM.currentTime === 0 && !mainAudioOneTime){
                     audio_mainBGM.loop = true;

@@ -99,7 +99,8 @@ function IntestineGame() {
         
         audio_ballRolling.pause();
         audio_ballRolling.currentTime = 0;
-        audio_ballRolling.loop = true;
+        if(!onMobileDevice)
+            audio_ballRolling.loop = true;
         audio_ballRolling.play();
         if (temp.id === "up") {
             ButtonPressed[0] = true;
@@ -146,7 +147,8 @@ function IntestineGame() {
         
         audio_ballRolling.pause();
         audio_ballRolling.currentTime = 0;
-        audio_ballRolling.loop = true;
+        if(!onMobileDevice)
+            audio_ballRolling.loop = true;
         audio_ballRolling.play();
         if (temp.id === "up") {
             ButtonPressed[0] = true;
@@ -347,6 +349,8 @@ function IntestineGame() {
         }
             
     }
+    
+    
     /**
      * This function first checks if the sleepTimer is greater than 0 and if it is,
      * it reduces the value by 0.1 seconds. This is done to make sure the game movement
@@ -355,14 +359,15 @@ function IntestineGame() {
      * method that corresponds to it. Thus, allowing the user to move left, right, up or down.
      */
     this.update = function () {
-        if(onMobileDevice){
-            if(audio_mazeGameBGM.currentTime <= 0 && startMazeGameMusic){
+        if(onMobileDevice()){
+            if(audio_mazeGameBGM.currentTime <= 0){
                 audio_mazeGameBGM.loop = true;
                 audio_mazeGameBGM.currentTime = 2;
                 audio_mazeGameBGM.muted = false; 
                 audio_mazeGameBGM.play();
             } else {
-                startMazeGameMusic = false;
+                if(!isGameMuted)
+                    audio_mazeGameBGM.muted = false;
             }
         }
         
