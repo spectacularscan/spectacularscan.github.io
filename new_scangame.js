@@ -1100,6 +1100,7 @@ function rocket_animation(){
             fly_rocket();
             break;
         case 6:
+            draw_endbackground();
             break;
     }
         
@@ -1294,6 +1295,15 @@ function fly_rocket(){
 
     add_y_rocket += 3;
 
+}
+
+/**
+ * function to draw end screen during the transition
+ * @function
+ */
+function draw_endbackground(){
+    canvas_ctx.clearRect(0, 0, convertSize(800), convertSize(450));
+    canvas_ctx.drawImage(image_rocket_background, 0, 0, convertSize(800), convertSize(450));    
 }
 
 /**
