@@ -7,6 +7,8 @@ var alertOneTime = false;
 function MainMenu(){
     var imageLoadDelay = 120;
     var imageOneTime = false;
+    var startPlayingAudio = false;
+    var mainAudioOneTime = false;
 	/**
 	*This is the psudeo constructor function for the main menu object.
 	*/
@@ -87,6 +89,8 @@ function MainMenu(){
                     audio_mainBGM.loop = true;
                     audio_mainBGM.currentTime = 2;
                     audio_mainBGM.muted = false;
+                    audio_mainBGM.play();
+                    startPlayingAudio = true;
                 }
 			}
 			/**This function animates the door element when the mouse hovers over it. */
@@ -250,6 +254,20 @@ function MainMenu(){
                 audio_rocketSound.muted = true;
             }
         }
+        
+        if(onMobileDevice){
+            if(startPlayingAudio){
+                if(audio_mainBGM.currentTime === 0 && !mainAudioOneTime){
+                    audio_mainBGM.loop = true;
+                    audio_mainBGM.currentTime = 2;
+                    audio_mainBGM.muted = false; 
+                    audio_mainBGM.play();
+                } else {
+                    mainAudioOneTime = true;
+                }
+            }
+        }
+        
                     
 	}	
 	/**This function is used to draw anything that needs to be redrawn continuesly to make animations. The monkey animation used this function to make the monkey wave and blink.*/

@@ -80,7 +80,7 @@ function IntestineGame() {
                 mcWhite.moveDown();
             }
         }
-        console.log("clicked");
+        //console.log("clicked");
     };
     /**
      * The onmousedown function is used only for the computers, laptops etc.
@@ -380,12 +380,12 @@ function IntestineGame() {
         if (keyPressed[mcWhite.up]) {
             mcWhite.moveUp();
             sleep(1);
-            console.log("Counter:" + mcWhite.counter);
+            //console.log("Counter:" + mcWhite.counter);
         }
         if (keyPressed[mcWhite.down]) {
             mcWhite.moveDown();
             sleep(1);
-            console.log("Counter:" + mcWhite.counter);
+            //console.log("Counter:" + mcWhite.counter);
         }
         if (keyPressed[mcWhite.right]) {
             if (mcWhite.counter == 11 || mcWhite.counter == 23 || mcWhite.counter == 35 || mcWhite.counter == 47 ||
@@ -395,7 +395,7 @@ function IntestineGame() {
                mcWhite.moveRight();
             }
             sleep(1);
-            console.log("Counter:" + mcWhite.counter);
+            //console.log("Counter:" + mcWhite.counter);
         }
         if (keyPressed[mcWhite.left]) {
             if (mcWhite.counter == 12 || mcWhite.counter == 24 || mcWhite.counter == 36 || mcWhite.counter == 48 ||
@@ -405,7 +405,7 @@ function IntestineGame() {
                 mcWhite.moveLeft();
             }
             sleep(1);
-            console.log("Counter:" + mcWhite.counter);
+            //console.log("Counter:" + mcWhite.counter);
         }
 //        if (ButtonPressed[0] == true) {
 //            buttonDelayUp -= 1;
