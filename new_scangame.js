@@ -191,6 +191,7 @@ function draw_scangame(){
 
     }else if(Scangame_gamedata.game_stage == 5){
         if(change <= 0){
+            audio_movingScanCameraSound.pause();
             Scangame_gamedata.game_stage = 3;
             block_onlick = false;
             if(belt_one)
@@ -214,8 +215,12 @@ function draw_scangame(){
             }
         }
     }else if(Scangame_gamedata.game_stage == 0){
+        block = false;
         if(Scangame_gamedata.main_completed_items.length == 2){
+            block = true;
             if(animation_counter > 50){
+                audio_transformingBed.loop = true;
+                audio_transformingBed.play();
                 Scangame_gamedata.game_stage = 6;
                 animation_counter = 0;
             }else{
@@ -223,14 +228,11 @@ function draw_scangame(){
             }
         }
     }
-    
-    
-    if(Scangame_gamedata.game_stage == 0){
-        block = false;
-    }else{
+
+    if(Scangame_gamedata.game_stage != 0){
         block = true;
     }
-
+    
 }
 
 //variables that are needed for the zoom in and zoom out animation
@@ -673,6 +675,8 @@ function move_belt(){
     
     
     if(actual_length > 411 * rect_ratio){
+        audio_pullingBelt.pause();
+        audio_scanBeltLock.play();
         Scangame_gamedata.game_stage = 2;
         if(belt_top){
             belt_top_zip = true;
@@ -859,6 +863,8 @@ function check1(){
             current_blur = 0;
             pause_time = 0;
             Scangame_gamedata.game_stage = 4;
+            audio_pullingBelt.loop = true;
+            audio_pullingBelt.play();
             belt_top = true;
         }
 
@@ -873,6 +879,8 @@ function check1(){
             current_blur = 0;
             pause_time = 0;
             Scangame_gamedata.game_stage = 4;
+            audio_pullingBelt.loop = true;
+            audio_pullingBelt.play();
             belt_bottom = true;
 
             current_belt = 370;
@@ -891,6 +899,8 @@ function check1(){
         belt_one = true;
         change = 90;
         Scangame_gamedata.game_stage = 5;
+        audio_movingScanCameraSound.loop = true;
+        audio_movingScanCameraSound.play();
 
 
     }else if(Scangame_gamedata.mouse_x > 398 * rect_ratio &&
@@ -904,6 +914,8 @@ function check1(){
         belt_one = false;
         change = 90;
         Scangame_gamedata.game_stage = 5;
+        audio_movingScanCameraSound.loop = true;
+        audio_movingScanCameraSound.play();
     }
 
     else if(Scangame_gamedata.mouse_x > 305.5 * rect_ratio && 
@@ -922,6 +934,8 @@ function check1(){
         change = 45;
         change_direction = true;
         Scangame_gamedata.game_stage = 5;
+        audio_movingScanCameraSound.loop = true;
+        audio_movingScanCameraSound.play();
 
     }
     else if(Scangame_gamedata.mouse_x > 619.5 * rect_ratio && 
@@ -939,6 +953,8 @@ function check1(){
         belt_one = false;
         change = 45;
         Scangame_gamedata.game_stage = 5;
+        audio_movingScanCameraSound.loop = true;
+        audio_movingScanCameraSound.play();
     }
 
 }
@@ -950,6 +966,7 @@ function check1(){
 function check2(){
     if(Scangame_gamedata.game_type == 1){
         if(Scangame_gamedata.game_stage == 4){
+            audio_pullingBelt.pause();
             if(belt_top && !belt_top_zip)
                 belt_top = false;
             if(belt_bottom && !belt_bottom_zip)
@@ -972,7 +989,7 @@ function check3(){
         if(Math.pow(Scangame_gamedata.mouse_x - 100 * rect_ratio, 2) +
            Math.pow(Scangame_gamedata.mouse_y - 125 * rect_ratio, 2) < 
            Math.pow(85 * rect_ratio * Scangame_gamedata.circle_size_ratio, 2) &&
-           !Scangame_gamedata.completed_items.includes(1) && Scangame_gamedata.game_stage != 1){
+           !Scangame_gamedata.main_completed_items.includes(1) && Scangame_gamedata.game_stage != 1){
 
             if(Scangame_gamedata.game_stage == 0){
                 Scangame_gamedata.game_stage = 3;
@@ -983,7 +1000,7 @@ function check3(){
         }else if(Math.pow(Scangame_gamedata.mouse_x - 100 * rect_ratio, 2) +
                  Math.pow(Scangame_gamedata.mouse_y - 325 * rect_ratio, 2) < 
                  Math.pow(85 * rect_ratio * Scangame_gamedata.circle_size_ratio, 2) &&
-                 !Scangame_gamedata.completed_items.includes(2) && Scangame_gamedata.game_stage != 1){
+                 !Scangame_gamedata.main_completed_items.includes(2) && Scangame_gamedata.game_stage != 1){
 
             if(Scangame_gamedata.game_stage == 2){
 
@@ -1120,6 +1137,7 @@ function rocket_animation(){
     }else if(current_rocket_anim == 4){
         if(angle_rocket > 104){
             current_rocket_anim = 5;
+            audio_transformingBed.pause();
             rocketanimation_counter = 0;
         }
     }else if(current_rocket_anim == 5){

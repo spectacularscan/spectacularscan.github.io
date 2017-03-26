@@ -195,11 +195,13 @@ function loadAssets() {
     audio_nextButtonPress = loadAudio("assets/sounds/Next Button Press.mp3");
     audio_explosion = loadAudio("assets/sounds/radioactive explosion sound.mp3");
     audio_ballRolling = loadAudio("assets/sounds/maze ball rolling.mp3");
+    audio_rocketSound = loadAudio("assets/sounds/rocket_sound.mp3"); 
+    audio_asteroidHit = loadAudio("assets/sounds/asteroid_hit.mp3");
     
     audioArray = [audio_transformingBed, audio_scanBeltLock, audio_buttonPress, audio_drinkingWithStraw, audio_mainBGM,
                  audio_mazeGameBGM, audio_milkPouring, audio_pullingBelt, audio_spaceshipGameBGM, audio_creamSquish,
                  audio_syringeOnSkin, audio_transitionWhoosh, audio_typingSound, audio_movingScanCameraSound,
-                 audio_limbSelectionSound, audio_nextButtonPress, audio_explosion, audio_ballRolling];
+                 audio_limbSelectionSound, audio_nextButtonPress, audio_explosion, audio_ballRolling, audio_rocketSound, audio_asteroidHit];
 
     //Scan game assets 
     image_rocket              = loadImage('assets/scangame/rocket.png');
@@ -238,7 +240,7 @@ function loadAssets() {
  * @function 
  */
 function loadChecker() {
-    if (numLoaded >= 185) {
+    if (numLoaded >= 187) {
 		if (document.readyState == "loaded" || document.readyState == "complete") {
 			// Everything has loaded
 			mainInitialization();

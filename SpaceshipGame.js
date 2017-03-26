@@ -17,13 +17,13 @@ function SpaceShipGame() {
     };
 
     //rocket sounds
-    var rocketSound = new Audio("assets/sounds/rocket_sound.mp3"); // buffers automatically when created
+    var rocketSound = audio_rocketSound; // buffers automatically when created
     rocketSound.loop = true;
     rocketSound.volume = 0.2;
     rocketSound.play();
 
     //bloodCell hit
-    var asteroidHit = new Audio("assets/sounds/asteroid_hit.mp3");
+    var asteroidHit = audio_asteroidHit;
 
 
     var canvas = document.getElementById("gameCanvas");

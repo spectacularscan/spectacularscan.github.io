@@ -57,7 +57,7 @@ function resizeGame() {
 	
     var moz_multiplier = 1;
     
-    if(typeof InstallTrigger !== 'undefined' && window.devicePixelRatio * 100 * 0.7 != 100 && !onMobileDevice()){
+    if(typeof InstallTrigger !== 'undefined' && window.devicePixelRatio * 100 * 0.5 != 100 && !onMobileDevice()){
         var zoom_values = [30, 50, 67, 80, 90, 100, 110, 120, 133, 150, 170, 200, 240, 300];
     
 		
@@ -74,7 +74,7 @@ function resizeGame() {
             return curr;
         }
 
-        moz_multiplier = closest(window.devicePixelRatio * 100 * 0.7 , zoom_values) / 100;
+        moz_multiplier = closest(window.devicePixelRatio * 100 * 0.5 , zoom_values) / 100;
     }
 
     var sizeModifier;
@@ -105,7 +105,6 @@ function resizeGame() {
 	
     //for any text we have within the gameArea
     gameArea.style.fontSize = (newWidth / 400) + 'em';
-    console.log(screen.width + " " + screen.height);
 	MOBILE_MULTIPLIER = onMobileDevice() ? 3 : 1;
 	
     gameCanvas.width = newWidth * moz_multiplier * MOBILE_MULTIPLIER;

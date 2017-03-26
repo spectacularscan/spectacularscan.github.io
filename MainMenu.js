@@ -25,8 +25,7 @@ function MainMenu(){
 		
 		var myInterval;
 		var boolSound = true;
-		var Mainaudio = new Audio('assets/sounds/MainMenu_song.mp3');
-		Mainaudio.loop = true;
+		//Mainaudio.loop = true;
 		//Mainaudio.play();
 		var toyAudio = new Audio('assets/sounds/toyAudio.mp3');
 		toyAudio.volume = 0.1;
