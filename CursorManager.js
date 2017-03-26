@@ -13,6 +13,7 @@ function CursorManager() {
 		gameCanvas.addEventListener('touchstart', bindIt, false);
 		
 		// Set initial cursor
+		this.hideCursor = false;
 		this.customCursorScale = 0;
 		var im = image_arrowCursor;
 		this.setCustomCursor(true, im, "default", 0,0, 42, 42);
@@ -26,7 +27,7 @@ function CursorManager() {
 	}
 	
 	this.draw = function() {
-		if (this.drawCustomCursor) {	
+		if (this.drawCustomCursor && !this.hideCursor) {	
 			gameContext.globalAlpha = this.customCursorAlpha;
 			gameContext.drawImage(this.customCursorImage, 
 			this.cursorX+convertSize(this.customCursorXOffset + this.customCursorWidth/2*(1-this.customCursorScale)),
@@ -67,7 +68,7 @@ function CursorManager() {
 		this.customCursorID = cursorID;
 		
 		if (onMobileDevice() && this.customCursorID === "default") {
-			this.drawCustomCursor = false;
+			this.hideCursor = true;
 			document.getElementById("mouse").style.display = "none";
 		}
 	}

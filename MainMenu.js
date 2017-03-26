@@ -69,7 +69,7 @@ function MainMenu(){
                     audio_mazeGameBGM.play();
                 }
                 //change this back to true
-                goToNextState(false);
+                goToNextState(true);
 			}
 			/**This function animates the plant element when the mouse hovers over it. */
 			elemPlant.onmouseover = function () {

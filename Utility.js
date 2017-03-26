@@ -78,31 +78,36 @@ var isFirefox = typeof InstallTrigger !== 'undefined';
  */
 function AudioManager(toFadeIn, toFadeOut){
     this.oneTime = true;
+    this.isIOS = navigator.userAgent.match(/iPhone|iPad|iPod/i);
     
     this.audioFadeInit = function(){
-        if(isGameMuted){
-            toFadeIn.volume = 0.99;
-            toFadeOut.volume = 0.01;
-        } else {
-            toFadeIn.volume = 0.01;
-            toFadeOut.volume = 0.99;
-            toFadeIn.muted = false;
-        }
-            
-        this.isFadeFinished = false
-        toFadeIn.currentTime = 5;
-        toFadeIn.loop = true;
-        
+        if(!this.isIOS){
+            if(isGameMuted){
+                toFadeIn.volume = 0.99;
+                toFadeOut.volume = 0.01;
+            } else {
+                toFadeIn.volume = 0.01;
+                toFadeOut.volume = 0.99;
+                toFadeIn.muted = false;
+            }
+
+            this.isFadeFinished = false
+            toFadeIn.currentTime = 5;
+            toFadeIn.loop = true;
+        }   
     }
     
     this.audioFadeUpdate = function(){
-        if(toFadeOut.volume >= 0.02){
-            toFadeOut.volume -= 0.005;
-            toFadeIn.volume += 0.005;
-        } else {
-            toFadeOut.muted = true;
-            this.isFadeFinished = true;
+        if(!this.isIOS){
+           if(toFadeOut.volume >= 0.02){
+                toFadeOut.volume -= 0.005;
+                toFadeIn.volume += 0.005;
+            } else {
+                toFadeOut.muted = true;
+                this.isFadeFinished = true;
+            } 
         }
+        
     }
     
     this.reverseAudio = function(){
