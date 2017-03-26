@@ -14,6 +14,12 @@ function SpaceShipGame() {
         this.audioManager.audioFadeInit();
         upButton.startFadingIn();
         downButton.startFadingIn();
+        
+        if(onMobileDevice()){
+            audio_spaceshipGameBGM.muted = false;
+            audio_spaceshipGameBGM.loop = true;
+            audio_spaceshipGameBGM.play();
+        }
     };
 
     //rocket sounds

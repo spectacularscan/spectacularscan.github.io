@@ -1139,6 +1139,10 @@ function rocket_animation(){
         if(angle_rocket > 104){
             current_rocket_anim = 5;
             audio_transformingBed.pause();
+            if(navigator.userAgent.match(/iPhone|iPad|iPod/i))
+                audio_mainBGM.pause();
+            if(onMobileDevice())
+                audio_spaceshipGameBGM.muted = false;
             rocketanimation_counter = 0;
         }
     }else if(current_rocket_anim == 5){
