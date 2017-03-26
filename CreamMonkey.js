@@ -226,21 +226,25 @@ function CreamMonkey() {
 										Math.round((event.clientY-rect.top)/(rect.bottom-rect.top)*gameCanvas.height));
 										
 		if (this.monkeyState === "NORMAL") {
-            audio_buttonPress.play();
+            
 			switch(result){
 				case "LeftHand":
+                    audio_buttonPress.play();
 					//zoom in to left hand, do something
 					this.currentLimb = 0;
 					break;
 				case "RightHand":
+                    audio_buttonPress.play();
 					//zoom in to right hand, do something
 					this.currentLimb = 1;
 					break;
 				case "LeftFoot":
+                    audio_buttonPress.play();
 					//zoom in to left foot, do something
 					this.currentLimb = 2;
 					break;
 				case "RightFoot":
+                    audio_buttonPress.play();
 					//zoom in to right foot, do something
 					this.currentLimb = 3;
 					break;
@@ -258,18 +262,22 @@ function CreamMonkey() {
 			}
 		} else if (this.monkeyState === "CREAMREADY") {
             //apply cream
-            audio_creamSquish.play();
+            
 			switch(result){
 				case "LeftHand":
+                    audio_creamSquish.play();
                     this.canApplyCream(result);
 					break;
 				case "RightHand":
+                    audio_creamSquish.play();
                     this.canApplyCream(result);
 					break;
 				case "LeftFoot":
+                    audio_creamSquish.play();
                     this.canApplyCream(result);
 					break;
 				case "RightFoot":
+                    audio_creamSquish.play();
                     this.canApplyCream(result);
 					break;
 				case "Invalid":
@@ -280,10 +288,11 @@ function CreamMonkey() {
 			}
 		} else if (this.monkeyState === "INJECTIONREADY") {
             //inject monkey
-            audio_syringeOnSkin.play();
+            
 			if(globalCursorManager.getCurrentCursorID() === "syringe"
 				&& this.limbInFocus === result
 				&& !this.isInjecting) {
+                audio_syringeOnSkin.play();
 				this.creamGame.injection1.setLimbValues(result);
 				this.isInjecting = true;
 				var im = image_monkeyHand;

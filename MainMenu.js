@@ -17,7 +17,7 @@ function MainMenu(){
         }
         audio_mainBGM.loop = true;
         audio_mainBGM.currentTime = 2;
-        audio_mainBGM.play();
+        audio_mainBGM.muted = false;
 		var background = document.getElementById("background");
 		background.style.display = "initial";
         document.getElementById("mouse").style.visibility = "visible";
@@ -200,6 +200,15 @@ function MainMenu(){
                     isGameMuted = false;
                     for(i=0;i<audioArray.length;++i)
                         audioArray[i].muted = false;
+                    
+                    audio_asteroidHit.muted = true;
+                    if(current_state_id !== "mazegame")
+                        audio_mazeGameBGM.muted = true;
+                    if(current_state_id !== "spaceshipgame"){
+                        audio_spaceshipGameBGM.muted = true;
+                        audio_rocketSound.muted = true;
+                    }
+                        
                 }	
 			}
 		}
@@ -220,10 +229,31 @@ function MainMenu(){
                 imageOneTime = true;
             }
         }
+        
+        if(isGameMuted){
+            for(i=0;i<audioArray.length;++i)
+                audioArray[i].muted = true;
+        } else {
+            for(i=0;i<audioArray.length;++i)
+                audioArray[i].muted = false;
+
+            audio_asteroidHit.muted = true;
+            if(current_state_id !== "mazegame")
+                audio_mazeGameBGM.muted = true;
+            if(current_state_id !== "spaceshipgame"){
+                audio_spaceshipGameBGM.muted = true;
+                audio_rocketSound.muted = true;
+            }
+        }
+                    
 	}	
 	/**This function is used to draw anything that needs to be redrawn continuesly to make animations. The monkey animation used this function to make the monkey wave and blink.*/
 	this.draw = function(){
 		this.animMonkey();
+        if(isGameMuted)
+            document.getElementById("snd").src ="assets/menu/soundOff.png";
+        else
+            document.getElementById("snd").src ="assets/menu/sound.png";
 	}
 	/**This function is used to destroy or 'disable' the current object so another object - another stage - can take its place. For the main menu, it sets its display to none.*/
 	this.destroy = function(){

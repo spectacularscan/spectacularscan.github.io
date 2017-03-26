@@ -181,11 +181,11 @@ function loadAssets() {
     audio_scanBeltLock = loadAudio("assets/sounds/belt lock sound.mp3");
     audio_buttonPress = loadAudio("assets/sounds/Button press sound.mp3");
     audio_drinkingWithStraw = loadAudio("assets/sounds/drinking through straw sound.mp3");
-    audio_mainBGM = loadAudio("assets/sounds/Main background music.mp3");
-    audio_mazeGameBGM = loadAudio("assets/sounds/Maze Game Background Music.mp3");
+    audio_mainBGM = loadAudio("assets/sounds/Main background music.mp3", true);
+    audio_mazeGameBGM = loadAudio("assets/sounds/Maze Game Background Music.mp3", true);
     audio_milkPouring = loadAudio("assets/sounds/pouring.mp3");
     audio_pullingBelt = loadAudio("assets/sounds/pulling belt sound.mp3");
-    audio_spaceshipGameBGM = loadAudio("assets/sounds/Spaceship Game Background Music.mp3");
+    audio_spaceshipGameBGM = loadAudio("assets/sounds/Spaceship Game Background Music.mp3", true);
     audio_creamSquish = loadAudio("assets/sounds/squish.mp3");
     audio_syringeOnSkin = loadAudio("assets/sounds/syringe hitting skin sound.mp3");
     audio_transitionWhoosh = loadAudio("assets/sounds/Transition whoosh.mp3");
@@ -195,8 +195,8 @@ function loadAssets() {
     audio_nextButtonPress = loadAudio("assets/sounds/Next Button Press.mp3");
     audio_explosion = loadAudio("assets/sounds/radioactive explosion sound.mp3");
     audio_ballRolling = loadAudio("assets/sounds/maze ball rolling.mp3");
-    audio_rocketSound = loadAudio("assets/sounds/rocket_sound.mp3"); 
-    audio_asteroidHit = loadAudio("assets/sounds/asteroid_hit.mp3");
+    audio_rocketSound = loadAudio("assets/sounds/rocket_sound.mp3", true); 
+    audio_asteroidHit = loadAudio("assets/sounds/asteroid_hit.mp3", true);
     
     audioArray = [audio_transformingBed, audio_scanBeltLock, audio_buttonPress, audio_drinkingWithStraw, audio_mainBGM,
                  audio_mazeGameBGM, audio_milkPouring, audio_pullingBelt, audio_spaceshipGameBGM, audio_creamSquish,
@@ -248,6 +248,14 @@ function loadChecker() {
 			window.addEventListener('focus', function(){
             if(!isGameMuted)
                 for(i=0;i<audioArray.length;++i) audioArray[i].muted = false;
+                
+                if(current_state_id !== "mazegame")
+                    audio_mazeGameBGM.muted = true;
+                if(current_state_id !== "spaceshipgame"){
+                    audio_spaceshipGameBGM.muted = true;
+                    audio_rocketSound.muted = true;
+                    audio_asteroidHit.muted = true;
+                }
 			}, false);
 			
 			window.addEventListener('blur', function(){
@@ -282,10 +290,15 @@ function loadImage(url) {
  * Loads a single audio clip for use in the game.
  * @function
  * @param {string} url - url of sound clip to load.
+ * @param {boolean} shouldAutoPlay - should the audio play as soon as its loaded
  * @returns {Audio} sound clip that has just been loaded.
  */
-function loadAudio(url) {
+function loadAudio(url, shouldAutoPlay=false) {
     nextAudio = new Audio(url);
+    if(shouldAutoPlay){
+        nextAudio.autoplay = true;
+        nextAudio.muted = true;
+    }
     nextAudio.oncanplaythrough = incrementNumLoaded(url);
     nextAudio.onerror = function () {
         console.log("Failed to load audio: \"" + url + "\"");

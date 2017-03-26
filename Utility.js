@@ -86,12 +86,13 @@ function AudioManager(toFadeIn, toFadeOut){
         } else {
             toFadeIn.volume = 0.01;
             toFadeOut.volume = 0.99;
+            toFadeIn.muted = false;
         }
             
         this.isFadeFinished = false
         toFadeIn.currentTime = 5;
         toFadeIn.loop = true;
-        toFadeIn.play();
+        
     }
     
     this.audioFadeUpdate = function(){
@@ -99,7 +100,7 @@ function AudioManager(toFadeIn, toFadeOut){
             toFadeOut.volume -= 0.005;
             toFadeIn.volume += 0.005;
         } else {
-            toFadeOut.pause();
+            toFadeOut.muted = true;
             this.isFadeFinished = true;
         }
     }

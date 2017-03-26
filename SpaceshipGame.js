@@ -18,12 +18,18 @@ function SpaceShipGame() {
 
     //rocket sounds
     var rocketSound = audio_rocketSound; // buffers automatically when created
-    rocketSound.loop = true;
+    
     rocketSound.volume = 0.2;
+    rocketSound.muted = false;
+    rocketSound.pause();
+    rocketSound.loop = true;
     rocketSound.play();
 
     //bloodCell hit
     var asteroidHit = audio_asteroidHit;
+    asteroidHit.muted = false;
+    asteroidHit.pause();
+    
 
 
     var canvas = document.getElementById("gameCanvas");
@@ -630,6 +636,7 @@ function SpaceShipGame() {
                 bumpBack = 0;
                 bumpBackSineCounter = 0;
                 ssXOffset = 0;
+                //asteroidHit.muted = true;
             }
         }
 

@@ -340,7 +340,7 @@ function IntestineGame() {
                     imageToDraw = winImage
             }
             imageToDraw.draw();
-            
+            audio_ballRolling.pause();
             stateChangeDelay -= 1;
             audioManager.reverseAudio();
             

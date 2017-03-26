@@ -271,6 +271,8 @@ function stateTransition() {
 		changedState = true;
 	} else if (transX >= GAME_ACTUAL_WIDTH) {
 		transitioning = false;
+        if(current_state_id === "mainmenu")
+            gameCanvas.style.zIndex = -1000;
 	}
 	
 	drawImageAdjusted(image_transition, transX, 0, GAME_ACTUAL_WIDTH, GAME_ACTUAL_HEIGHT);
@@ -332,7 +334,6 @@ function createAndSetNextState() {
                 case "mazegame":
                     currentState = new MainMenu();
                     current_state_id = "mainmenu";
-                    gameCanvas.style.zIndex = -1000;
                     break;
             }
         }
@@ -356,6 +357,13 @@ function muteHandler(xpos, ypos){
             isGameMuted = false;
             for(i=0;i<audioArray.length;++i)
                 audioArray[i].muted = false;
+            if(current_state_id !== "mazegame")
+                audio_mazeGameBGM.muted = true;
+            if(current_state_id !== "spaceshipgame"){
+                audio_spaceshipGameBGM.muted = true;
+                audio_rocketSound.muted = true;
+                audio_asteroidHit.muted = true;
+            }
         }
         else {
             isGameMuted = true;
