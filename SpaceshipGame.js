@@ -604,6 +604,10 @@ function SpaceShipGame() {
      * Also detects if there are any collision.
      */
     this.update = function () {
+        if(isGameMuted)
+            rocketSound.muted = true;
+        else
+            rocketSound.muted = false;
         
         this.audioManager.audioFadeUpdate();
         upButton.update();

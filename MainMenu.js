@@ -92,7 +92,7 @@ function MainMenu(){
 			elemDoor.onclick = function () {
 				document.getElementById("myClipboard").className = "vis";
 				document.getElementById("myElements").style.display = "none";
-                if(onMobileDevice){
+                if(onMobileDevice()){
                     audio_mainBGM.loop = true;
                     audio_mainBGM.currentTime = 2;
                     audio_mainBGM.muted = false;
