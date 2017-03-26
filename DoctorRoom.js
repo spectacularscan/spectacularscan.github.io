@@ -212,40 +212,40 @@ function Text(part){
     //switch statement controls which part of th script to use
     switch(part){
         case "1": this.txt1 = "Hello and welcome to Spect-acular Scan!";
-                this.txt2 = "We have our friend Marty here who needs to be seen.";
+                this.txt2 = "We have our friend Alex here who needs to be seen.";
                 this.txt3 = "Can you help him through it and have fun along the way?";
-                this.txt4 = "Alright! First, tell us which scan we should do for Marty.";
+                this.txt4 = "Alright! First, tell us which scan we should do for Alex.";
     
                 this.lines = [this.txt1, this.txt2, this.txt3, this.txt4];  
                 break;
             
-        case "2": this.txt1 = "We need you to put cream on Marty's hand or foot, you choose where.";
+        case "2": this.txt1 = "We need you to put cream on Alex's hand or foot, you choose where.";
                 this.txt2 = "The cream makes sure that he doesn't feel anything when we inject him.";
                 this.txt3 = "No pain anywhere!       ";
-                this.txt4 = "Look, he isn't worried. Marty knows it won't hurt a bit! Let's do it!";
+                this.txt4 = "Look, he isn't worried. Alex knows it won't hurt a bit! Let's do it!";
             
                 this.lines = [this.txt1, this.txt2, this.txt3, this.txt4];  
                 break;
         
         case "3": this.txt1 = "Well done! We knew you could do it! It wasn't hard, was it?";
-                this.txt2 = "Next, Marty is going to lie on the bed and you're going to help him strap in.";
-                this.txt3 = "Don't move around on the bed Marty. It's going to be fine!";
-                this.txt4 = "You're then going to move the cameras to Marty and take pictures.";
-                this.txt5 = "Say cheese Marty! Let's get started!";
+                this.txt2 = "Next, Alex is going to lie on the bed and you're going to help him strap in.";
+                this.txt3 = "Don't move around on the bed Alex. It's going to be fine!";
+                this.txt4 = "You're then going to move the cameras to Alex and take pictures.";
+                this.txt5 = "Say cheese Alex! Let's get started!";
                 
                 this.lines = [this.txt1, this.txt2, this.txt3, this.txt4, this.txt5];
                 break;
         
-        case "4": this.txt1 = "Nice job! Marty didn't even realise the time going by.";
+        case "4": this.txt1 = "Nice job! Alex didn't even realise the time going by.";
                 this.txt2 = "He was too busy watching his favourite movie!";
                 this.txt3 = "\u2026 Hey! What's going on?! \u2026 Look! ";
                 this.txt4 = "Something is happening to the scanner!!";
-                this.txt5 = "Help Marty avoid the asteroids! Here we go!";
+                this.txt5 = "Help Alex avoid the asteroids! Here we go!";
             
                 this.lines = [this.txt1, this.txt2, this.txt3, this.txt4, this.txt5];
                 break;
         
-        case "5": this.txt1 = "Amazing! You've done it all! The scan is done and Marty feels fine!";
+        case "5": this.txt1 = "Amazing! You've done it all! The scan is done and Alex feels fine!";
                 this.txt2 = "In fact, he couldn't be happier!";
                 this.txt3 = "He can go back to his parents and go home!";
                 this.txt4 = "Thanks for all your help, we couldn't have done it without you!"; 
@@ -256,8 +256,8 @@ function Text(part){
             
             //For the milk scan, this text will replace that of case 2
         case "6": this.txt1 = "To start, we need you to make the milk radioactive for the scan.";
-                this.txt2 = "This lets us see the milk inside Marty with an x-ray.";
-                this.txt3 = "Then you need to help Marty drink it. Let's do it!"
+                this.txt2 = "This lets us see the milk inside Alex with an x-ray.";
+                this.txt3 = "Then you need to help Alex drink it. Let's do it!"
                 
                 this.lines = [this.txt1, this.txt2, this.txt3];
                 break;

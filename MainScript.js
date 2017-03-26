@@ -393,29 +393,6 @@ function unloadScrollBars() {
     document.body.scroll = "no"; // ie only
 }
 
-// (SKIPPING STATE) FOR DEBUGGING AND STUFF, REMOVE THIS LATER
-// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-canvas.addEventListener('keydown', heyYouPressedAKey, false);
-function heyYouPressedAKey(e) {
-	if (e.keyCode == 107) {
-		if (current_state_id === "mainmenu" || current_state_id === "submenu") {
-			alert("can't skip until after game is selected");
-			return;
-		}
-		globalCursorManager.setCustomCursor(true, image_arrowCursor, "default", 0,0, 42, 42);
-		// Go forward a state
-		goToNextState(true);
-	} else if (e.keyCode == 109) {
-		// Go back a state
-		state_index -= 2;
-		if (state_index < 0)
-			document.location.reload();
-		goToNextState();
-		globalCursorManager.setCustomCursor(true, image_arrowCursor, "default", 0,0, 42, 42);
-	}
-}
-// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-
 gameCanvas.addEventListener('click', muteButtonClickHandler, false);
 
 function preventBehavior(e) {
