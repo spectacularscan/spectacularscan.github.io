@@ -23,7 +23,6 @@ function MainMenu(){
 		var background = document.getElementById("background");
 		background.style.display = "initial";
         document.getElementById("mouse").style.visibility = "visible";
-		window.scrollTo(0, 0);
 		
 		var myInterval;
 		var boolSound = true;
@@ -224,6 +223,7 @@ function MainMenu(){
 	}
 	/**This is the update function used to commmunicate with the main script. Not used in this code*/
 	this.update = function(){
+		window.scrollTo(0, 0);
         if(isFirefox){
             if(imageLoadDelay <= 0 && !imageOneTime){
                 document.getElementById("loadingText").style.display = "none";
