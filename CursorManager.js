@@ -70,7 +70,8 @@ function CursorManager() {
 		if (onMobileDevice() && this.customCursorID === "default") {
 			this.hideCursor = true;
 			document.getElementById("mouse").style.display = "none";
-		}
+		} else
+			this.hideCursor = false;
 	}
 	
 	/**
