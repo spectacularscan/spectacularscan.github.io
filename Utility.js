@@ -106,7 +106,14 @@ function AudioManager(toFadeIn, toFadeOut){
                 toFadeOut.muted = true;
                 this.isFadeFinished = true;
             } 
+            
+            if(!isGameMuted && onMobileDevice){
+                toFadeIn.muted = false;
+                toFadeIn.play();
+            }
+                
         }
+        
         
     }
     
