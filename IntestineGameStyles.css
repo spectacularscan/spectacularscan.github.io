@@ -1,0 +1,8 @@
+/* css */
+
+#gameCanvas {
+
+    background-image: url("Assets/bgIncrScale.png");
+    display: block;
+    margin: 0 auto;
+}

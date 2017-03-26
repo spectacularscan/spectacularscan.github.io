@@ -1,0 +1,142 @@
+#background {
+	cursor: none;
+	width: 100%;
+	position: absolute;
+}
+
+#mouse {
+	position: absolute;
+	pointer-events: none;
+	width: 4%;
+}
+
+#myPlant {
+    position: absolute;
+    left: 75%;
+	top: 29%;
+	width: 16.3%;
+}
+
+#mazetext {
+    position: absolute;
+    left: 0%;
+	top: 30%;
+	width: 100%;
+}
+
+#myDoor {
+    position: absolute;
+    left: 37%;
+	top: 24.95%;
+	width: 25%;
+}
+
+#myMonkey {
+    position: absolute;
+    left: 20%;
+	top: 54%;
+	width: 23.8%;
+}
+
+#myToy {
+    position: absolute;
+    left: 10%;
+	top: 0%;
+	width: 17%;
+}
+
+#myClipboard {
+    position: absolute;
+	width: 100%;
+}
+
+#tick1 {
+	position: absolute;
+	left: 14.7%;
+	top: 39%;
+	width: 12.53%;
+}
+
+#tick2 {
+	position: absolute;
+	left: 14.7%;
+	top: 70%;
+	width: 12.53%;
+}
+
+#home {
+	position: absolute;
+	left: 1%;
+	top: 0%;
+	width: 7%;
+}
+
+#sound {
+    position: absolute;
+	left: 92.3%;
+	top: 0%;
+	width: 8%;
+    opacity: 0.5;
+}
+
+.scale{
+	animation-name: scaler;
+	animation-duration: 1s;
+}
+
+.glo{
+	line-height: 0px;
+	animation-name: glow;
+	animation-duration: 2s;
+}
+
+.over{
+	animation-name: rota;
+	animation-duration: 0.5s;
+}
+
+@keyframes scaler {
+    0%   {transform:scaleX(1);}
+    50%  {transform:scaleX(1.2);}
+    100% {transform:scaleX(1);}
+}
+
+@keyframes rota {
+    0%   {transform: rotate( -0deg ); }
+    33%  {transform: rotate(-20deg); }
+    66% {transform: rotate( +15deg ); }
+    100% {transform: rotate( -0deg ); }
+}
+
+@keyframes glow {
+    0%   {box-shadow: 0px 0px 0px 0px rgba(0, 0, 0, 0); }
+    33%  {box-shadow: 0px 0px 40px 20px rgba(255, 255, 51, 0.80); }
+    100% {box-shadow: 0px 0px 0px 0px rgba(0, 0, 0, 0); }
+}
+
+@keyframes fadein {
+    from {
+        opacity:0;
+    }
+    to {
+        opacity:1;
+    }
+}
+
+.invis{
+    visibility: hidden;
+}
+
+.vis{
+    visibility: visible;
+	animation: fadein 1s;
+}
+
+.notopac{
+	opacity: 0;
+}
+
+.none{
+	transform:none;
+	transition: transform 250ms ease
+}

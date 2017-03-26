@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: CreamButton.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: CreamButton.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * Constructor for our user-made button. It contains behaviour for shaking,
+ * pulsating and fading, among other things.
+ * @constructor
+ * @param {string} id - id for button to identify it.
+ * @param {Image} image - image to use for button.
+ * @param {Number} x - x position of button.
+ * @param {Number} y - y position of button.
+ * @param {Number} width - width of button.
+ * @param {Number} height - height of button.
+ */
+function Button(id, image, x, y, width, height) {
+    this.id = id;
+	this.image = image;
+	this.x = x;
+	this.y = y;
+	this.width = width;
+	this.height = height;
+	this.alpha = 0;
+	this.fadingIn = false;
+	this.isPulsating = false;
+	this.pulsateSizeBoost = 0;
+	this.pulsateSineCounter = 0;
+	this.shakeOffset = 0;
+	this.shakeTimer = 0;
+	this.sparkles = [];
+	this.sparkleCounter = 0;
+	for (var i = 0; i &lt; 20; ++i) {
+		this.sparkles[i] = new Sparkle(8,8);
+	}	
+	this.update = function() {
+        //using the alpha to produce fading effect
+		if (this.fadingIn) {
+			if (this.alpha &lt; 1) {
+				this.alpha += 0.02;
+			} else {
+				this.alpha = 1;
+				this.fadingIn = false;
+			}
+		}
+        //using sine to change the size of buttons to produce pulsating effect
+		if (this.isPulsating) {
+			this.pulsateSizeBoost = 8 + Math.sin(this.pulsateSineCounter) * 8;
+			this.pulsateSineCounter += 0.05;
+			// Manage sparkles
+			for (var i = 0; i &lt; this.sparkles.length; ++i) {
+				if (!this.sparkles[i].disabled) {
+					this.sparkles[i].update();
+					if (this.sparkles[i].y+this.sparkles[i].height > this.y+this.height)
+						// Disable sparkle
+						this.sparkles[i].disabled = true;
+				}
+			}
+            //produce sparkles
+			if (this.sparkleCounter &lt;= 0) {
+				// New sparkle
+				this.sparkleCounter = 0.25;
+				if (this.sparkles[0].disabled) {
+					this.sparkles[0].appear(this.x, this.y, this.width, this.height);
+					// Move sparkle to back of array
+					this.sparkles.push(this.sparkles.shift());
+				}
+			} else {
+				this.sparkleCounter -= 0.05;
+			}
+					
+		}
+        //produce shaking effect
+		if (this.shakeTimer > 0) {
+			this.shakeOffset = Math.sin(this.shakeTimer) * 5;
+			this.shakeTimer -= 0.45;
+			if (this.shakeTimer &lt;= 0)
+				this.shakeOffset = 0;
+		}
+		
+	}
+	
+	this.startFadingIn = function() {
+		this.fadingIn = true;
+	}
+	this.setPulsating = function(pulsate) {
+		this.isPulsating = pulsate;
+		if (!pulsate)
+			this.pulsateSizeBoost = 0;
+	}
+	
+	this.startShake = function() {
+		this.shakeTimer = 25;
+	}
+	
+	this.draw = function() {
+		gameContext.globalAlpha = this.alpha;
+		drawImageAdjusted(this.image, this.x - this.pulsateSizeBoost/2 + this.shakeOffset, this.y - this.pulsateSizeBoost/2, 
+		this.width + this.pulsateSizeBoost, this.height + this.pulsateSizeBoost);
+		gameContext.globalAlpha = 1;
+		
+		// Draw sparkles
+		if (this.isPulsating)
+			for (var i = 0; i &lt; this.sparkles.length; ++i)
+				if (!this.sparkles[i].disabled)
+					this.sparkles[i].draw();
+	}
+}
+
+/**
+ * Constructor for button sparkles
+ * @constructor
+ * @param {Number} width - width of sparkle.
+ * @param {Number} height - height of sparkle.
+ */
+function Sparkle(width, height) {
+	this.gravity = 0.001;
+	this.width = width;
+	this.height = height;
+	this.disabled = true;
+	
+	// Pass it x and y for the top left of the spawn area
+	this.appear = function(x, y, spawnAreaWidth, spawnAreaHeight) {
+		this.x = x + Math.random() * spawnAreaWidth;
+		this.y = y + Math.random() * spawnAreaHeight;
+		// Random speeds
+		this.ySpeed = -0.05;
+		this.disabled = false;
+	}
+	
+	this.update = function() {
+		// Fall
+		this.ySpeed += this.gravity;
+		this.y += this.ySpeed;
+	}
+	
+	this.draw = function() {
+		drawImageAdjusted(image_sparkle, this.x, this.y, this.width, this.height);
+	}
+}
+
+// buttons is an array of buttons
+// position: "left", "right"
+// padding - a number of pixels
+function positionButtons(buttons, position, padding, distanceFromEdge=16, distanceFromTop=0) {
+	var y = 16 + distanceFromTop;
+	
+	for (var i = 0; i &lt; buttons.length; ++i) {		
+		if (position === "right") {
+			buttons[i].x = GAME_ACTUAL_WIDTH - buttons[i].width - distanceFromEdge;
+		} else
+			buttons[i].x = distanceFromEdge;
+	
+
+		if (i === 0) {
+			buttons[i].y = y;
+			y += buttons[i].height + padding;
+		} else {
+			buttons[i].y = y;
+			y += buttons[i].height + padding;
+		}
+	}
+}</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="AudioManager.html">AudioManager</a></li><li><a href="BlinkMask.html">BlinkMask</a></li><li><a href="BoundingBox.html">BoundingBox</a></li><li><a href="Button.html">Button</a></li><li><a href="Cream.html">Cream</a></li><li><a href="CreamGame.html">CreamGame</a></li><li><a href="CreamMonkey.html">CreamMonkey</a></li><li><a href="CursorManager.html">CursorManager</a></li><li><a href="DoctorRoom.html">DoctorRoom</a></li><li><a href="HelperArrow.html">HelperArrow</a></li><li><a href="HelperHand.html">HelperHand</a></li><li><a href="Injection.html">Injection</a></li><li><a href="IntestineGame.html">IntestineGame</a></li><li><a href="MainMenu.html">MainMenu</a></li><li><a href="MazeButton.html">MazeButton</a></li><li><a href="mcTile.html">mcTile</a></li><li><a href="MilkGame.html">MilkGame</a></li><li><a href="Scan_game.html">Scan_game</a></li><li><a href="Scangame_gamedata.html">Scangame_gamedata</a></li><li><a href="SideBar.html">SideBar</a></li><li><a href="SpaceShipGame.html">SpaceShipGame</a></li><li><a href="Sparkle.html">Sparkle</a></li><li><a href="SubMenu.html">SubMenu</a></li><li><a href="Text.html">Text</a></li></ul><h3>Global</h3><ul><li><a href="global.html#add_listeners">add_listeners</a></li><li><a href="global.html#beltscreen">beltscreen</a></li><li><a href="global.html#change_frame">change_frame</a></li><li><a href="global.html#check1">check1</a></li><li><a href="global.html#check2">check2</a></li><li><a href="global.html#check3">check3</a></li><li><a href="global.html#convertSize">convertSize</a></li><li><a href="global.html#convertSizes">convertSizes</a></li><li><a href="global.html#createAndSetNextState">createAndSetNextState</a></li><li><a href="global.html#draw">draw</a></li><li><a href="global.html#draw_basics">draw_basics</a></li><li><a href="global.html#draw_belt">draw_belt</a></li><li><a href="global.html#draw_beltscreen">draw_beltscreen</a></li><li><a href="global.html#draw_machine_part">draw_machine_part</a></li><li><a href="global.html#draw_mainbackground">draw_mainbackground</a></li><li><a href="global.html#draw_scangame">draw_scangame</a></li><li><a href="global.html#drawImageAdjusted">drawImageAdjusted</a></li><li><a href="global.html#drawRotatedRect">drawRotatedRect</a></li><li><a href="global.html#drawTextAdjusted">drawTextAdjusted</a></li><li><a href="global.html#fade_in_rocket">fade_in_rocket</a></li><li><a href="global.html#fade_out_rocket">fade_out_rocket</a></li><li><a href="global.html#fillRectAdjusted">fillRectAdjusted</a></li><li><a href="global.html#finished_options">finished_options</a></li><li><a href="global.html#fly_rocket">fly_rocket</a></li><li><a href="global.html#gameLoop">gameLoop</a></li><li><a href="global.html#getRandomArbitrary">getRandomArbitrary</a></li><li><a href="global.html#goToNextState">goToNextState</a></li><li><a href="global.html#inBoundingBox">inBoundingBox</a></li><li><a href="global.html#loadAssets">loadAssets</a></li><li><a href="global.html#loadAudio">loadAudio</a></li><li><a href="global.html#loadChecker">loadChecker</a></li><li><a href="global.html#loadImage">loadImage</a></li><li><a href="global.html#machinescreen">machinescreen</a></li><li><a href="global.html#mainInitialization">mainInitialization</a></li><li><a href="global.html#mainscreen">mainscreen</a></li><li><a href="global.html#move_bed_rocket">move_bed_rocket</a></li><li><a href="global.html#move_belt">move_belt</a></li><li><a href="global.html#move_left_rocket">move_left_rocket</a></li><li><a href="global.html#move_machine_part">move_machine_part</a></li><li><a href="global.html#muteButtonClickHandler">muteButtonClickHandler</a></li><li><a href="global.html#muteHandler">muteHandler</a></li><li><a href="global.html#onMobileDevice">onMobileDevice</a></li><li><a href="global.html#resizeGame">resizeGame</a></li><li><a href="global.html#restartThisState">restartThisState</a></li><li><a href="global.html#rocket_animation">rocket_animation</a></li><li><a href="global.html#rotate_rocket">rotate_rocket</a></li><li><a href="global.html#selected_option">selected_option</a></li><li><a href="global.html#setRoute">setRoute</a></li><li><a href="global.html#startTransition">startTransition</a></li><li><a href="global.html#stateTransition">stateTransition</a></li><li><a href="global.html#touchend_scangame">touchend_scangame</a></li><li><a href="global.html#touchmove_scangame">touchmove_scangame</a></li><li><a href="global.html#touchstart_scangame">touchstart_scangame</a></li><li><a href="global.html#unloadScrollBars">unloadScrollBars</a></li><li><a href="global.html#zip_belt">zip_belt</a></li><li><a href="global.html#zoom_in_out">zoom_in_out</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.3</a> on Sun Mar 26 2017 02:05:17 GMT+0100 (GMT Summer Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
