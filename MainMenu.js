@@ -62,7 +62,12 @@ function MainMenu(){
 			elemPlant.onclick = function () {
                 document.getElementById("mouse").style.visibility = "hidden";
                 goingToMazeGame = true;
-                startMazeGameMusic = true;
+                if(onMobileDevice()){
+                    audio_mazeGameBGM.loop = true;
+                    audio_mazeGameBGM.currentTime = 2;
+                    audio_mazeGameBGM.muted = false; 
+                    audio_mazeGameBGM.play();
+                }
                 goToNextState(true);
 			}
 			/**This function animates the plant element when the mouse hovers over it. */
