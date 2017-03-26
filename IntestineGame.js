@@ -477,6 +477,10 @@ function IntestineGame() {
 //        audio_mainBGM.play();
         audio_ballRolling.pause();
         audio_ballRolling.currentTime = 0;
+        
+        if(onMobileDevice()){
+            audio_mazeGameBGM.muted = true;
+        }
     }
     /**
      * This method will make tiles according to the values provided.
