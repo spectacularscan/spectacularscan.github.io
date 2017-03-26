@@ -225,7 +225,7 @@ function IntestineGame() {
         
         audio_ballRolling.pause();
         audio_ballRolling.currentTime = 0;
-        audio_ballRolling.loop = true;
+        //audio_ballRolling.loop = true;
         audio_ballRolling.play();
     }
     this.keyUpFunction = function(e) {
@@ -355,6 +355,18 @@ function IntestineGame() {
      * method that corresponds to it. Thus, allowing the user to move left, right, up or down.
      */
     this.update = function () {
+        if(onMobileDevice){
+            if(audio_mazeGameBGM.currentTime <= 0 && startMazeGameMusic){
+                audio_mazeGameBGM.loop = true;
+                audio_mazeGameBGM.currentTime = 2;
+                audio_mazeGameBGM.muted = false; 
+                audio_mazeGameBGM.play();
+            } else {
+                startMazeGameMusic = false;
+            }
+        }
+        
+        
         if(audioManager.isFadeFinished && stateChangeDelay <= 0){
                 goToNextState(true);
         }

@@ -1,5 +1,6 @@
 var difficulty = false;
 var alertOneTime = false;
+var startMazeGameMusic = false;
 /** This is the javascript object for the main menu. It holdes all of the functions and variables used to make interactions for the user to the main menu.
 *@author Luke
 * @constructor
@@ -61,6 +62,7 @@ function MainMenu(){
 			elemPlant.onclick = function () {
                 document.getElementById("mouse").style.visibility = "hidden";
                 goingToMazeGame = true;
+                startMazeGameMusic = true;
                 goToNextState(true);
 			}
 			/**This function animates the plant element when the mouse hovers over it. */
