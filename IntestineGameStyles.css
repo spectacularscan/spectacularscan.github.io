@@ -2,7 +2,7 @@
 
 #gameCanvas {
 
-    background-image: url("Assets/bgIncrScale.png");
+    background-image: url("assets/bgIncrScale.png");
     display: block;
     margin: 0 auto;
 }

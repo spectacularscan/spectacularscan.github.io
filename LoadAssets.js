@@ -17,17 +17,17 @@ function loadAssets() {
     image_syringe1 = loadImage("assets/creamgame/syringe_clear1.png");
 
     // Spaceship game assets
-    image_asteroid1 = loadImage("Assets/spaceshipgame/asteroid1.png");
-    image_asteroid2 = loadImage("Assets/spaceshipgame/asteroid2.png");
-    image_asteroid3 = loadImage("Assets/spaceshipgame/asteroid3.png");
-    image_asteroid4 = loadImage("Assets/spaceshipgame/asteroid4.png");
-    image_spaceship = loadImage("Assets/spaceshipgame/spaceship.png");
-    image_spaceship2 = loadImage("Assets/spaceshipgame/spaceship2.png");
-    image_spaceship3 = loadImage("Assets/spaceshipgame/spaceship3.png");
-    image_spaceship4 = loadImage("Assets/spaceshipgame/spaceship4.png");
-    image_spaceship5 = loadImage("Assets/spaceshipgame/spaceship5.png");
-    image_spaceshipDown = loadImage("Assets/spaceshipgame/spaceshipDown.png");
-    image_spaceshipUp = loadImage("Assets/spaceshipgame/spaceshipUp.png");
+    image_asteroid1 = loadImage("assets/spaceshipgame/asteroid1.png");
+    image_asteroid2 = loadImage("assets/spaceshipgame/asteroid2.png");
+    image_asteroid3 = loadImage("assets/spaceshipgame/asteroid3.png");
+    image_asteroid4 = loadImage("assets/spaceshipgame/asteroid4.png");
+    image_spaceship = loadImage("assets/spaceshipgame/spaceship.png");
+    image_spaceship2 = loadImage("assets/spaceshipgame/spaceship2.png");
+    image_spaceship3 = loadImage("assets/spaceshipgame/spaceship3.png");
+    image_spaceship4 = loadImage("assets/spaceshipgame/spaceship4.png");
+    image_spaceship5 = loadImage("assets/spaceshipgame/spaceship5.png");
+    image_spaceshipDown = loadImage("assets/spaceshipgame/spaceshipDown.png");
+    image_spaceshipUp = loadImage("assets/spaceshipgame/spaceshipUp.png");
 
     // Menu assets
     image_milkUnpressed = loadImage("assets/submenu/milk_unpressed.png");
@@ -156,8 +156,8 @@ function loadAssets() {
 	
     // Backgrounds
     image_transition = loadImage("assets/backgrounds/greenBackground.png");
-    image_restBackground = loadImage("Assets/backgrounds/restBackground.png");
-    image_spaceshipBackground = loadImage("Assets/backgrounds/spaceshipBG.png");
+    image_restBackground = loadImage("assets/backgrounds/restBackground.png");
+    image_spaceshipBackground = loadImage("assets/backgrounds/spaceshipBG.png");
     image_doctorRoomBg = loadImage("assets/backgrounds/doctors_room_side.png");
 
     // Maze game assets

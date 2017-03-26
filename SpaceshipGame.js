@@ -23,7 +23,7 @@ function SpaceShipGame() {
     rocketSound.play();
 
     //bloodCell hit
-    var asteroidHit = new Audio("Assets/sounds/asteroid_hit.mp3");
+    var asteroidHit = new Audio("assets/sounds/asteroid_hit.mp3");
 
 
     var canvas = document.getElementById("gameCanvas");

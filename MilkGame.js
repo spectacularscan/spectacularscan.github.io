@@ -31,7 +31,7 @@ function MilkGame() {
 	var milkBlinkMask;
 
     //gulping sound effect
-    var gulping = new Audio("Assets/sounds/gulp.mp3");
+    var gulping = new Audio("assets/sounds/gulp.mp3");
 
     //indicates stage of the game
     var stage = 0;
