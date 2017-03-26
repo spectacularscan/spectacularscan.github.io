@@ -18,6 +18,7 @@ function MilkGame() {
     this.nextStateDelay = 0;
     if (this.cursorX != this.oldCursorX && this.cursorY != this.oldCursorY)
         this.cursorHasMoved = true;
+	var used_green_carton = false;
 
     //canvas
     var canvas = document.getElementById("gameCanvas");
@@ -598,10 +599,11 @@ function MilkGame() {
             bool_CursorAnimationCrystal = true;
             buttonClicked.setPulsating(false);
             globalCursorManager.setCustomCursor(true, imgRadioActiveCrystal, "crystal", -100, -100, 200, 200);
-        } else if (buttonClicked.id === "carton" && stage === 1) {
+        } else if (buttonClicked.id === "carton" && stage === 1 && !used_green_carton) {
             audio_limbSelectionSound.play();
             cursorChangeImage = true;
             globalCursorManager.setCustomCursor(true, image_cartonCursor, "carton", -180, -140, 200, 200);
+			used_green_carton = true;
             buttonClicked.setPulsating(false);
         } else if (buttonClicked.id === "milkbutton" && stage === 2) {
             audio_limbSelectionSound.play();
