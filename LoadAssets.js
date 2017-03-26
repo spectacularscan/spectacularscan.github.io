@@ -148,7 +148,7 @@ function loadAssets() {
     image_monkey = loadImage("assets/monkey/monkey_smile.png");
     image_monkeySad = loadImage("assets/monkey/monkey_sad.png");
     image_monkeyHand = loadImage("assets/monkey/monkey_hand.png");
-    image_flyingMonkey = loadImage("assets/monkey/monkeyFly.png");
+    image_flyingMonkey = loadImage("assets/monkey/monkeyfly.png");
 	image_doctorMonkey = loadImage("assets/monkey/MonkeyDoctorMode.png");
 	image_waveMonkey = loadImage("assets/menu/monkeyW1.png");
 	image_karateMonkey = loadImage("assets/monkey/MonkeyKarateMode.png");
