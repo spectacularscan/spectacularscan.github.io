@@ -83,6 +83,11 @@ function MainMenu(){
 			elemDoor.onclick = function () {
 				document.getElementById("myClipboard").className = "vis";
 				document.getElementById("myElements").style.display = "none";
+                if(onMobileDevice){
+                    audio_mainBGM.loop = true;
+                    audio_mainBGM.currentTime = 2;
+                    audio_mainBGM.muted = false;
+                }
 			}
 			/**This function animates the door element when the mouse hovers over it. */
 			elemDoor.onmouseover = function () {
