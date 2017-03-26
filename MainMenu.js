@@ -21,6 +21,7 @@ function MainMenu(){
 		var background = document.getElementById("background");
 		background.style.display = "initial";
         document.getElementById("mouse").style.visibility = "visible";
+		window.scrollTo(0, 0);
 		
 		var myInterval;
 		var boolSound = true;
