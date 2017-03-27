@@ -12,7 +12,7 @@ var Scangame_gamedata;
 function Scan_game(){
     
     /**
-     * function draw that is made to be called by main game loop
+     * function draw that is called by the game loop which draws the current state of the game onto the canvas
      * @function
      */
     this.draw = function(){
@@ -20,7 +20,7 @@ function Scan_game(){
     }
     
     /**
-     * function to intialise the data that is needed for the scan game
+     * function to intialise the canvas that is needed for the scan game
      * @function
      */
     this.init = function(){
@@ -37,7 +37,7 @@ function Scan_game(){
     }
     
     /**
-     * that destroys all listeners to not cause any conflicts in the future
+     * This function destroys all EventListeners to not cause any conflicts in the future with other games
      * @function
      */
     this.destroy = function(){
@@ -54,7 +54,7 @@ function Scan_game(){
 }
 
 /**
- * An object that stores all data that is needed for the scan game
+ * An object that stores all data that is needed for the scan game 
  * @constructor
  */
 function Scangame_gamedata(){
@@ -76,7 +76,7 @@ function Scangame_gamedata(){
     this.beltscreen_state    = 1;
 
     /**
-     * function to change the x and y that is used to check if the buttons were clicked
+     * function to store the last location where the mouse was clicked.
      * @function
      */
     this.change_mouse_coords = function(x, y){
@@ -90,9 +90,8 @@ function Scangame_gamedata(){
 var animation_counter = 0;
 
 /**
- * function that is called by the draw and is responsible for the scan game stage switch
- * this holds a switch that depending on a game stage calls different methods
- * using animation counter it controls how many times some of the game stages can be called
+ * function that is called by the draw and is responsible for discerning what stage the game
+ * is in, and calling the methods for each respective stage.
  * @function
  */
 function draw_scangame(){
@@ -289,8 +288,25 @@ var increase_blur = false;
 var pause_time = 0;
 
 /**
+ * function to draw the main screen
+ * it draws the background and the icons of the mini games
+ * @function
+ */
+function mainscreen(){
+    draw_mainbackground(0, 0, 2400, 1350, 0, 800);
+    
+    draw_basics();
+ 
+    canvas_ctx.drawImage(image_game1_logo_scangame, convertSize(100) - (convertSize(103) * Scangame_gamedata.circle_size_ratio) / 2, convertSize(125) - (convertSize(94) * Scangame_gamedata.circle_size_ratio) / 2, convertSize(103) * Scangame_gamedata.circle_size_ratio, convertSize(94) * Scangame_gamedata.circle_size_ratio);
+    
+    canvas_ctx.drawImage(image_game2_logo_scangame, convertSize(100) - (convertSize(65) * Scangame_gamedata.circle_size_ratio) / 2, convertSize(325) - (convertSize(120) * Scangame_gamedata.circle_size_ratio) / 2, convertSize(65) * Scangame_gamedata.circle_size_ratio, convertSize(120) * Scangame_gamedata.circle_size_ratio);
+    
+    change_frame();
+}
+
+/**
  * function to draw the belt screen that is a main screen for one of the games
- * it draws background, logos on the side and belt positions
+ * it draws background, icons on the side and belt positions
  * @function
  */
 function beltscreen(){
@@ -318,24 +334,7 @@ function beltscreen(){
 }
 
 /**
- * function to draw the main screen
- * it draws the background and the logos of the mini games
- * @function
- */
-function mainscreen(){
-    draw_mainbackground(0, 0, 2400, 1350, 0, 800);
-    
-    draw_basics();
- 
-    canvas_ctx.drawImage(image_game1_logo_scangame, convertSize(100) - (convertSize(103) * Scangame_gamedata.circle_size_ratio) / 2, convertSize(125) - (convertSize(94) * Scangame_gamedata.circle_size_ratio) / 2, convertSize(103) * Scangame_gamedata.circle_size_ratio, convertSize(94) * Scangame_gamedata.circle_size_ratio);
-    
-    canvas_ctx.drawImage(image_game2_logo_scangame, convertSize(100) - (convertSize(65) * Scangame_gamedata.circle_size_ratio) / 2, convertSize(325) - (convertSize(120) * Scangame_gamedata.circle_size_ratio) / 2, convertSize(65) * Scangame_gamedata.circle_size_ratio, convertSize(120) * Scangame_gamedata.circle_size_ratio);
-    
-    change_frame();
-}
-
-/**
- * function to draw the machine's game screen 
+ * function to draw the machine's game screen, including the icons on the side and the background
  * @function
  */
 function machinescreen(){
@@ -406,7 +405,7 @@ function machinescreen(){
 }
 
 /**
- * function to draw the machine part at specified position
+ * function to draw the machine part at specified position around the machine at a certain angle
  * @param {number} - temp_angle to rotate the canvas to that angle
  * @function
  */
@@ -422,7 +421,7 @@ function draw_machine_part(temp_angle){
 }
 
 /**
- * function to draw the selected option
+ * function to draw a selected item in game.
  * @function
  */
 function selected_option(){
@@ -442,7 +441,7 @@ function selected_option(){
 }
 
 /**
- * function to draw the green arc around games and tasks that were completed
+ * function to draw the green arc around games and tasks that were completed and a tick icon in the bottom right hand corner
  * @function
  */
 function finished_options(){
@@ -506,7 +505,7 @@ function finished_options(){
 }
 
 /**
- * function to draw the side menu without logos, only the rectangle and the circles
+ * Function to draw the side menu without logos, only the rectangle and the circles.
  * @function
  */
 function draw_basics(){
@@ -538,8 +537,8 @@ var belt_one_moved = false;
 var belt_two_moved = false;
 
 /**
- * function to draw the moving part
- * it changes the angle at each iteration and stops when the change variable reaches 0
+ * function to draw a part of the machine game while it is moving
+ * it changes the angle at each iteration and stops when the change variable reaches 0 - once it has reached its final position
  * @function
  */
 function move_machine_part(){
@@ -564,15 +563,18 @@ function move_machine_part(){
     canvas_ctx.drawImage(image_machine_part, convertSize(408), convertSize(345), convertSize(200), convertSize(90));
     canvas_ctx.restore();
 
-    if(!belt_one)
+    if(!belt_one){
         angle1++;
+    }
     
     canvas_ctx.save();
+    
     canvas_ctx.translate(convertSize(507.5), convertSize(233.5));
     canvas_ctx.rotate(angle1 * Math.PI /180);
     canvas_ctx.translate(convertSize(-507.5), convertSize(-233.5));
     
     canvas_ctx.drawImage(image_machine_part, convertSize(408), convertSize(345), convertSize(200), convertSize(90));
+    
     canvas_ctx.restore();
     
     canvas_ctx.drawImage(image_machine_part1_logo, convertSize(100) - (convertSize(103) * Scangame_gamedata.circle_size_ratio) / 2, convertSize(133) - (convertSize(94) * Scangame_gamedata.circle_size_ratio) / 2, convertSize(103) * Scangame_gamedata.circle_size_ratio, convertSize(80) * Scangame_gamedata.circle_size_ratio);
@@ -604,27 +606,26 @@ function zip_belt(){
     canvas_ctx.drawImage(image_belt2_logo, convertSize(100) - (convertSize(125) * Scangame_gamedata.circle_size_ratio) / 2, convertSize(325) - (convertSize(90) * Scangame_gamedata.circle_size_ratio) / 2, convertSize(125) * Scangame_gamedata.circle_size_ratio, convertSize(90) * Scangame_gamedata.circle_size_ratio);
     
     
-    if(belt_top && !belt_top_zip)
+    if(belt_top && !belt_top_zip){
         draw_belt(x_belt, 153, 0);
-    else if(belt_top && belt_top_zip)
+    } else if(belt_top && belt_top_zip){
         draw_belt(643, 153, 0);
-    else if(!belt_top && !belt_top_zip)
+    } else if(!belt_top && !belt_top_zip){
         draw_belt(233, 153, 0);
+    }
     
-    
-    if(belt_bottom && !belt_bottom_zip)
+    if(belt_bottom && !belt_bottom_zip){
         draw_belt(x_belt, 370, 0);
-    else if(belt_bottom && belt_bottom_zip)
+    } else if(belt_bottom && belt_bottom_zip){
         draw_belt(643, 370, 0);
-    else if(!belt_bottom && !belt_bottom_zip)
+    } else if(!belt_bottom && !belt_bottom_zip){
         draw_belt(233, 370, 0);
-    
+    }
     
     if(!stop)
         x_belt += changeby_x;
     else
         x_belt = 233;
-    
     
     change_frame();
 }
@@ -792,6 +793,8 @@ var temp_completed_items;
 
 /**
  * function to add different listeners depending if it is a mobile device of a computer
+ * The listeners it adds refer to methods written elsewhere which perform different actions 
+ * depending on the stage of the game
  * @function
  */
 function add_listeners(){
@@ -819,7 +822,8 @@ function add_listeners(){
 }
 
 /**
- * function for the touch move listener
+ * function for the touch move listener while on mobile or other devices which
+ * support touch-screens 
  * @function
  */
 function touchmove_scangame(e){
@@ -827,7 +831,8 @@ function touchmove_scangame(e){
 }
 
 /**
- * function for the touch start listener
+ * function for the touch start listener while on mobile or other devices which
+ * support touch screens
  * @function
  */
 function touchstart_scangame(e){
@@ -837,7 +842,8 @@ function touchstart_scangame(e){
 }
 
 /**
- * function for the touch end listener
+ * function for the touch end listener while on mobile or other devices that 
+ * support touch-screens
  * @function
  */
 function touchend_scangame(e){
@@ -847,7 +853,7 @@ function touchend_scangame(e){
 
 /**
  * function to check if the click was at any buttons and it changes the game stage if 
- * all conditions were met 
+ * the correct conditions were met, depending on the state of the game and where they clicked
  * @function
  */
 function check1(){
@@ -960,7 +966,8 @@ function check1(){
 }
 
 /**
- * function to stop the animation if the belt zipping is manual
+ * function to stop the animation if the user stops holding the belt while in-game
+ * and returns the belt to its original state
  * @function
  */
 function check2(){
@@ -978,7 +985,8 @@ function check2(){
 }
 
 /**
- * function to check if any game was selected at the main menu in the Scan game
+ * function to check if a game was selected at the main menu in the Scan game
+ * and sets the stage to the correct game
  * @function
  */
 function check3(){
@@ -1023,7 +1031,7 @@ var pause_time1 = 0;
 
 /**
  * function that is responsible for the in-game animation that changes frames and 
- * makes the monkey move hands
+ * makes the monkey move hands while in his idle position
  * @function
  */
 function change_frame(){
@@ -1076,7 +1084,8 @@ var current_rocket_anim = 0;
 
 /**
  * function to control the flow of the rocket animation
- * it has a switch that calls different methods 
+ * it has a switch that calls different methods, each of which
+ * correspond to a different part of the animation
  * @function
  */
 function rocket_animation(){
@@ -1160,7 +1169,8 @@ var current_y_rocket = 0,
     changeby_y_rocket = 2;
 
 /**
- * function to make the animation where the bed moves up
+ * function to make the animation where the bed moves up and enters the machine
+ * as per a real scan
  * @function
  */
 function move_bed_rocket(){
@@ -1181,7 +1191,7 @@ var current_x_rocket = 0,
     changeby_x_rocket = 2;
 
 /**
- * function to make the animation where the bed and the machine moves left
+ * function to make the animation where the bed and the machine move left
  * @function
  */
 function move_left_rocket(){
@@ -1221,7 +1231,7 @@ function fade_out_rocket(){
 }
 
 /**
- * function to fade-in the rocket parts on top of the bed and the machine 
+ * function to fade-in the rocket parts on top of the bed and the machine, making the bed resemble a rocket
  * @function
  */
 function fade_in_rocket(){
@@ -1251,7 +1261,8 @@ var center_x1_rocket = 76.5 + 407/2,
     center_y1_rocket = 3 + 416/2;
 
 /**
- * function to rotate the rocket and make it smaller in same time as an animation
+ * function to rotate the rocket and make it smaller in real time as an animation
+ * making it face the monitor on the left hand side.
  * @function
  */
 function rotate_rocket(){
@@ -1280,7 +1291,7 @@ var center_x_rocket = 76.5 + 407/2,
 var add_y_rocket = 0;
     
 /**
- * function to make the animation where the rocket flies into the tv
+ * function to make the animation where the rocket flies into the monitor
  * @function
  */
 function fly_rocket(){
@@ -1302,7 +1313,7 @@ function fly_rocket(){
 }
 
 /**
- * function to draw end screen during the transition
+ * function to draw end screen after the rocket transition, leading into the following game
  * @function
  */
 function draw_endbackground(){
@@ -1311,7 +1322,8 @@ function draw_endbackground(){
 }
 
 /**
- * function to draw different backgrounds depending of the background state
+ * function to draw different backgrounds depending of the background state, which is dependent
+ * on the state of the game
  * @param {Number} - x position on the image 
  * @param {Number} - y position on the image 
  * @param {Number} - w width starting from the x position 
@@ -1346,7 +1358,8 @@ function draw_mainbackground(x, y, w, h, x1, w1){
 }
 
 /**
- * function to draw different backgrounds depending of the background state
+ * function to draw different backgrounds depending of the state of the belt game
+ * which requires two different backgrounds, unlike the other screens
  * @param {int} - x position on the image 
  * @param {int} - y position on the image 
  * @param {int} - w width starting from the x position 
