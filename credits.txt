@@ -1,0 +1,8 @@
+//Credits for music and sound effects
+None of the music/sound effects used in the application 
+belong to Team Helios.
+
+Permissions granted courtesy of:
+	- www.instrumentalsfree.com
+	- http://www.freesfx.co.uk
+	- www.zapsplat.com
